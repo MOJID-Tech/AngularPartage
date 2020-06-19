@@ -1,0 +1,109 @@
+<div class="wrapper">
+  <app-slidemenu></app-slidemenu>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+
+        <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="fonrecri" >Le bénéfice des départements </h2>
+          <br><br>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Equipe</th>
+              <th>Benefice des managers</th>
+              <th>Benefice des salaries</th>
+              <th>Budget Manager</th>
+              <th>Budget Hors Manager</th>
+              <th>Pourcentage Manager</th>
+              <th>Pourcentage HorsManager</th>
+              <th>Consommation</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let equipe of equipes | async">
+
+              <td>{{equipe.nom_equipe}}</td>
+              <td> {{getBeneficeM(equipe.id)}}   </td>
+              <td> {{getBeneficeHM(equipe.id)}}   </td>
+
+              <td><input type="text"   [(ngModel)]="arrmanager[equipe.id]"   class="form-control"></td>
+              <td><input type="text"   [(ngModel)]="arrhomanager[equipe.id]"  class="form-control"></td>
+              <div *ngIf="getbudgetEquipe(equipe.id)==null;then notexist else exist"></div>
+
+             <td>
+    <button   (click)="save(equipe.id,arrhomanager[equipe.id],arrmanager[equipe.id])" class="btn btn-info"     style="margin-left: 10px">save</button>
+              </td>
+
+             <ng-template  #exist >
+                <td>  {{budgetEquipe[equipe.id].pourcentage_manager}} </td>
+                <td>  {{budgetEquipe[equipe.id].pourcentage_horsmanager}} </td>
+                <td>  0 </td>
+              </ng-template>
+              <ng-template #notexist>
+                <td> 0 </td>
+                <td> 0  </td>
+              </ng-template>
+
+
+
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+        </div>
+        <!-- /.card -->
+
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0-pre
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+
